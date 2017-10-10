@@ -5,30 +5,33 @@
  */
 package tugastiga;
 
-import javafx.scene.Node;
-
 /**
  *
  * @author user
  */
-public class ChainCircular implements LinearList {
-    protected ChainNodeCircular firstNode;
-    protected Node last;
+public class ChainDouble implements LinearList{
+    protected ChainNodeDouble firstNode;
     protected int size;
     
-    public ChainCircular(int initialcapacity){
+    public ChainDouble(int initialcapacity){
+        
     }
-    public ChainCircular(){
+    public ChainDouble(){
         this(0);
     }
+    
+    
     @Override
-    public boolean isEmpty(){
-        return size==0;     
+    public boolean isEmpty() {
+        return size == 0;
     }
+
+    
     @Override
     public int size() {
         return size;
     }
+
     public void checkIndex(int index){
         if(index < 0 || index >= size){
             throw new IndexOutOfBoundsException(
@@ -39,7 +42,8 @@ public class ChainCircular implements LinearList {
     @Override
     public Object get(int index) {
         checkIndex(index);
-        ChainNodeCircular currentNode = firstNode;
+        
+        ChainNodeDouble currentNode = firstNode;
         for(int i = 0; i < index; i++){
             currentNode = currentNode.next;
         }
@@ -49,7 +53,7 @@ public class ChainCircular implements LinearList {
     
     @Override
     public int indexOf(Object theElement) {
-        ChainNodeCircular currentNode = firstNode;
+        ChainNodeDouble currentNode = firstNode;
         int index = 0;
         while(currentNode != null && !currentNode.element.equals(theElement)){
             currentNode = currentNode.next;
@@ -73,7 +77,7 @@ public class ChainCircular implements LinearList {
             firstNode = firstNode.next;
         }
         else{
-            ChainNodeCircular q = firstNode;
+            ChainNodeDouble q = firstNode;
             for(int i = 0; i<index-1; i++){
                 q = q.next;
             }
@@ -90,17 +94,14 @@ public class ChainCircular implements LinearList {
             throw new IndexOutOfBoundsException("index = "+ index+" size = "+size);
         }
         if(index == 0){
-            ChainNodeCircular p = firstNode;
-            firstNode = new ChainNodeCircular(theElement, firstNode);
-            //p.last = p.next;
+            firstNode = new ChainNodeDouble(theElement, firstNode);
         }
         else{
-            ChainNodeCircular p = firstNode;
+            ChainNodeDouble p = firstNode;
             for(int i = 0; i < index - 1; i++){
                 p = p.next;
             }
-            p.next = new ChainNodeCircular(theElement, p.next);
-            p.last = p.next;
+            p.next = new ChainNodeDouble(theElement, p.next);
         }
         size++;
     }
@@ -110,7 +111,7 @@ public class ChainCircular implements LinearList {
     public String toString(){
         StringBuffer s = new StringBuffer("[");
         
-        ChainNodeCircular currentNode = firstNode;
+        ChainNodeDouble currentNode = firstNode;
         while(currentNode != null){
             if(currentNode.element == null){
                 s.append("null, ");
@@ -127,7 +128,4 @@ public class ChainCircular implements LinearList {
         
         return new String(s);
     }
-
 }
-
-
